@@ -1,7 +1,5 @@
 // Update with your config settings.
-require("dotenv").config();
-
-const pgConnection = process.env.DATABASE_URL || "postgresql://postgres@localhost/auth";
+const pgConnection = process.env.DATABASE_URL || "postgresql://postgres@localhost/dogs";
 
 module.exports = {
 
@@ -16,6 +14,20 @@ module.exports = {
         conn.run("PRAGMA foreign_keys = ON", done);
       },
     },
+    migrations: {
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
+  },
+
+  testing: {
+    client: "sqlite3",
+    connection: {
+      filename: "./data/test.db3",
+    },
+    useNullAsDefault: true,
     migrations: {
       directory: "./data/migrations",
     },
