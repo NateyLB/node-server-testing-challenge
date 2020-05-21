@@ -34,24 +34,26 @@ describe("server", () => {
     //             "ownerID": 6
     //         })
     //         .then(response=>{
+    //             console.log(response.status)
     //             expect(response.status).toBe(201)
     //         })
     //     })
     // })
 
     describe("insert() and delete()", () => {
-        it("Should be able to insert and delete after", async () => {
+        it("Should be able to insert ", async () => {
             await Dogs.addDog({
                 name: "Titus",
                 breed: "Chow-Chow",
                 ownerID: 6
             });
-            var dogs = await db("dogs");
-            expect(dogs).toHaveLength(1)
+             //var dogs = await db("dogs");
+            expect(await db("dogs")).toHaveLength(1)
 
+        })
+        it("Should be able to delete the inserted resource", async ()=>{
             await Dogs.delDog(1)
-            dogs = await db("dogs")
-            expect(dogs).toHaveLength(0)
+            expect(await db("dogs")).toHaveLength(0)
         })
     })
 
